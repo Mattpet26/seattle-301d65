@@ -30,19 +30,18 @@ function makeRandom() {
 
 function displayPics(){
   while(viewed.length < 6){
-    var rando = makeRandom();
+    let rando = makeRandom();
     while(!viewed.includes(rando)){
       viewed.push(rando);
     }
   }
-  console.log(rando);
-  // TODO: In a sentence or two, explain why the previous line of code threw an error when we changed the variable declaration from `var to `let`.
-  // On line 33 we declared a new variable RANDO. Let gives us the ability to declare variables that are limited in scope to the block. This variable is delcared in the function then pushed into viewed. Changing the variable from let to const created a few problems because some variables needed the ability to change. 
+  // console.log(rando);
+  // TODO: In a sentence or two, explain why the previous line of code threw an error when we changed the variable declaration from `const to `let`.
+  // Changing the variable from let to const created a few problems because some variables needed the ability to change. Setting something to const and then trying to change that causes an error, constants cannot change. (use let)
 
-  // PUT YOUR RESPONSE IN THIS COMMENT
   console.log(viewed);
 
-  for (var i = 0; i < 3; i++){
+  for (let i = 0; i < 3; i++){
     const temp = viewed.shift();
     pics[i].src = allProducts[temp].path;
     pics[i].id = allProducts[temp].name;
@@ -64,7 +63,7 @@ function handleClick(event) {
   for(let i = 0; i < names.length; i++){
     if(event.target.id === allProducts[i].name) {
       allProducts[i].votes += 1;
-      console.log(event.target.id + ' has ' + allProducts[i].votes + ' votes in ' + allProducts[i].views + ' views');
+      console.log(`${event.target.id} has ${allProducts[i].votes} votes in ${allProducts[i].views} views`);
     }
   }
   localStorage.busmall = JSON.stringify(allProducts);
@@ -75,7 +74,7 @@ function handleClick(event) {
 function showList() {
   for(let i = 0; i < allProducts.length; i++) {
     const liEl = document.createElement('li');
-    liEl.textContent = allProducts[i].name + ' has ' + allProducts[i].votes + ' votes in ' + allProducts[i].views + ' views';
+    liEl.textContent = `${allProducts[i].name} has ${allProducts[i].votes} votes in ${allProducts[i].views} views`;
     list.appendChild(liEl);
   }
 }
